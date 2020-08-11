@@ -1,16 +1,15 @@
 package main
 
 import (
-	"github.com/gofiber/fiber"
+	"github.com/korgottt/kratos-rest-api/server"
+	"github.com/rs/zerolog/log"
 )
 
-
 func main() {
-	app := fiber.New()
+	app := server.NewApplication()
 
-	app.Get("/", func(c *fiber.Ctx){
-		c.Send("Hello world")
-	})
+	if err := app.Listen(3000); err != nil {
+		log.Info().Msgf("could not listen on port 3000 %v", err)
+	}
 
-	app.Listen(3000)
 }
